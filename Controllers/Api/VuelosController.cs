@@ -19,6 +19,24 @@ public class VuelosController : ControllerBase
     [HttpGet("ciudades-destino")]
     public IActionResult CiudadesDestino()
     {
+        var client = new MongoClient(CadenaConexion.MONGO_DB);
+        var db = client.GetDatabase("Aeropuerto");
+        var collection = db.GetCollection<Vuelo>("Vuelos");
+
+        var lista = collection.Distinct<string>("CiudadDestino", FilterDefinition<Vuelo>.Empty).ToList();
+
+        return Ok();
+    }
+
+    [HttpGet("estatus")]
+    public IActionResult ListarEstatus()
+    {
+        var client = new MongoClient(CadenaConexion.MONGO_DB);
+        var db = client.GetDatabase("Aeropuerto");
+        var collection = db.GetCollection<Vuelo>("Vuelos");
+
+        var lista = collection.Distinct<string>("EstatusVuelo", FilterDefinition<Vuelo>.Empty).ToList();
+
         return Ok();
     }
 }
