@@ -25,7 +25,7 @@ public class VuelosController : ControllerBase
 
         var lista = collection.Distinct<string>("CiudadDestino", FilterDefinition<Vuelo>.Empty).ToList();
 
-        return Ok();
+        return Ok(lista);
     }
 
     [HttpGet("estatus")]
@@ -37,7 +37,7 @@ public class VuelosController : ControllerBase
 
         var lista = collection.Distinct<string>("EstatusVuelo", FilterDefinition<Vuelo>.Empty).ToList();
 
-        return Ok();
+        return Ok(lista);
     }
 
     [HttpGet("listar-vuelos")]
